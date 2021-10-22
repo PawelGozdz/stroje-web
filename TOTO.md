@@ -1,0 +1,1 @@
+# Odpalić apkę i sprawdzić gdzie jestem

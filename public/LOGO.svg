@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="665.841" height="366" viewBox="0 0 665.841 366">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ed87c8;
+      }
+
+      .cls-10, .cls-2, .cls-5 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #ed87c8;
+        stroke-width: 9px;
+      }
+
+      .cls-3 {
+        fill: #a44;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        stroke: #707070;
+      }
+
+      .cls-5 {
+        stroke: #a44;
+        stroke-width: 7px;
+      }
+
+      .cls-6, .cls-7, .cls-8 {
+        fill: #030303;
+      }
+
+      .cls-6 {
+        font-size: 109px;
+        font-family: Ebrima-Bold, Ebrima;
+        font-weight: 700;
+      }
+
+      .cls-6, .cls-8 {
+        letter-spacing: -0.082em;
+      }
+
+      .cls-7 {
+        font-size: 68px;
+        font-family: CorbelLight, Corbel;
+        letter-spacing: 0.098em;
+      }
+
+      .cls-8 {
+        font-size: 59px;
+        font-family: NunitoSans-ExtraLight, Nunito Sans;
+        font-weight: 200;
+      }
+
+      .cls-9 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="LOGO" transform="translate(-573 -1597)">
+    <g id="Kolo_bg" data-name="Kolo bg" transform="translate(593 1618)">
+      <circle id="Ellipse_16" data-name="Ellipse 16" class="cls-1" cx="162" cy="162" r="162"/>
+      <g id="Ellipse_17" data-name="Ellipse 17" class="cls-2" transform="translate(-20 -21)">
+        <circle class="cls-9" cx="183" cy="183" r="183"/>
+        <circle class="cls-10" cx="183" cy="183" r="178.5"/>
+      </g>
+    </g>
+    <g id="Group_80" data-name="Group 80" transform="translate(849.168 1799.038)">
+      <g id="Group_78" data-name="Group 78" transform="translate(18.732 -19.49) rotate(-17)">
+        <path id="Path_42" data-name="Path 42" class="cls-3" d="M25.048,14.508c22.963-.3,23.542-27.582,23.485-8.027s-11.5,55.555-24.741,55.688S-.136,27.1-.079,7.55,2.085,14.8,25.048,14.508Z" transform="translate(0 0)"/>
+        <path id="Path_39" data-name="Path 39" class="cls-4" d="M0,0,3.922,7.446,9.412,12l5.714-4.657L19.134-.175,9.461,3.367Z" transform="translate(16.394 41.839)"/>
+        <path id="Path_40" data-name="Path 40" class="cls-4" d="M0,.057l3.293,4.7L7.9,7.61l4.8-2.988L16.065-.171,7.943,2.134Z" transform="matrix(-0.999, -0.035, 0.035, -0.999, 22.658, 36.002)"/>
+        <path id="Path_41" data-name="Path 41" class="cls-4" d="M0,.057l3.293,4.7L7.9,7.61l4.8-2.988L16.065-.171,7.943,2.134Z" transform="matrix(-0.999, -0.035, 0.035, -0.999, 42.545, 34.772)"/>
+        <line id="Line_2" data-name="Line 2" class="cls-5" y1="32.702" x2="0.096" transform="translate(22.672 62.308)"/>
+      </g>
+      <g id="Group_79" data-name="Group 79" transform="matrix(0.951, 0.309, -0.309, 0.951, 82.282, -37.715)">
+        <path id="Path_44" data-name="Path 44" class="cls-3" d="M24.615,14.292c23.712-.742,27.252-26.76,27.41-5S37.849,63.977,24.86,63.878.264,30.515.106,8.757.9,15.034,24.615,14.292Z" transform="translate(0 0)"/>
+        <path id="Path_39-2" data-name="Path 39" class="cls-4" d="M0,.1,5.782,8.473l8,5.187L21.949,8.6,27.609.311l-13.9,3.738Z" transform="matrix(-0.999, 0.035, -0.035, -0.999, 38.745, 52.476)"/>
+        <path id="Path_40-2" data-name="Path 40" class="cls-4" d="M0,.027,3.3,5.335,7.865,8.621l4.658-3.216L15.747.147,7.821,2.525Z" transform="matrix(0.996, -0.087, 0.087, 0.996, 7.354, 26.436)"/>
+        <path id="Path_41-2" data-name="Path 41" class="cls-4" d="M0,0,3.3,5.315,7.852,8.6l4.653-3.221L15.727.116,7.81,2.5Z" transform="translate(26.765 26.184) rotate(-10)"/>
+        <line id="Line_2-2" data-name="Line 2" class="cls-5" x1="0.264" y1="36.387" transform="translate(23.844 64.683)"/>
+      </g>
+    </g>
+    <g id="Group_81" data-name="Group 81" transform="translate(1071.168 1799.038)">
+      <g id="Group_78-2" data-name="Group 78" transform="translate(18.732 -19.49) rotate(-17)">
+        <path id="Path_42-2" data-name="Path 42" class="cls-3" d="M25.048,14.508c22.963-.3,23.542-27.582,23.485-8.027s-11.5,55.555-24.741,55.688S-.136,27.1-.079,7.55,2.085,14.8,25.048,14.508Z" transform="translate(0 0)"/>
+        <path id="Path_39-3" data-name="Path 39" class="cls-4" d="M0,0,3.922,7.446,9.412,12l5.714-4.657L19.134-.175,9.461,3.367Z" transform="translate(16.394 41.839)"/>
+        <path id="Path_40-3" data-name="Path 40" class="cls-4" d="M0,.057l3.293,4.7L7.9,7.61l4.8-2.988L16.065-.171,7.943,2.134Z" transform="matrix(-0.999, -0.035, 0.035, -0.999, 22.658, 36.002)"/>
+        <path id="Path_41-3" data-name="Path 41" class="cls-4" d="M0,.057l3.293,4.7L7.9,7.61l4.8-2.988L16.065-.171,7.943,2.134Z" transform="matrix(-0.999, -0.035, 0.035, -0.999, 42.545, 34.772)"/>
+        <line id="Line_2-3" data-name="Line 2" class="cls-5" y1="32.702" x2="0.096" transform="translate(22.672 62.308)"/>
+      </g>
+      <g id="Group_79-2" data-name="Group 79" transform="matrix(0.951, 0.309, -0.309, 0.951, 82.282, -37.715)">
+        <path id="Path_44-2" data-name="Path 44" class="cls-3" d="M24.615,14.292c23.712-.742,27.252-26.76,27.41-5S37.849,63.977,24.86,63.878.264,30.515.106,8.757.9,15.034,24.615,14.292Z" transform="translate(0 0)"/>
+        <path id="Path_39-4" data-name="Path 39" class="cls-4" d="M0,.1,5.782,8.473l8,5.187L21.949,8.6,27.609.311l-13.9,3.738Z" transform="matrix(-0.999, 0.035, -0.035, -0.999, 38.745, 52.476)"/>
+        <path id="Path_40-4" data-name="Path 40" class="cls-4" d="M0,.027,3.3,5.335,7.865,8.621l4.658-3.216L15.747.147,7.821,2.525Z" transform="matrix(0.996, -0.087, 0.087, 0.996, 7.354, 26.436)"/>
+        <path id="Path_41-4" data-name="Path 41" class="cls-4" d="M0,0,3.3,5.315,7.852,8.6l4.653-3.221L15.727.116,7.81,2.5Z" transform="translate(26.765 26.184) rotate(-10)"/>
+        <line id="Line_2-4" data-name="Line 2" class="cls-5" x1="0.264" y1="36.387" transform="translate(23.844 64.683)"/>
+      </g>
+    </g>
+    <text id="STROJE" class="cls-6" transform="translate(640 1766)"><tspan x="0" y="0">STROJE</tspan></text>
+    <text id="KARNA" class="cls-7" transform="translate(640 1845)"><tspan x="0" y="0">KARNA</tspan></text>
+    <text id="AŁO" class="cls-7" transform="translate(970.881 1845)"><tspan x="0" y="0">AŁO</tspan></text>
+    <text id="E" class="cls-7" transform="translate(1195.841 1845)"><tspan x="0" y="0">E</tspan></text>
+    <text id="wypożyczalnia_" data-name="wypożyczalnia " class="cls-8" transform="translate(908.841 1908)"><tspan x="0" y="0">wypożyczalnia </tspan></text>
+  </g>
+</svg>
