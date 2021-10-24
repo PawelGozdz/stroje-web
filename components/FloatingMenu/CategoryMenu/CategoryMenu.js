@@ -49,9 +49,10 @@ const useStyles = makeStyles(theme => ({
     listStyleType: 'none',
     marginLeft: 0,
     paddingLeft: 0,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flexWrap: 'wrap',
     [theme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-start',
       flexDirection: 'row',
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(1),

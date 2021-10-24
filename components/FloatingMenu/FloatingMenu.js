@@ -44,5 +44,8 @@ const useStyles = makeStyles(theme => ({
   divider: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   }
 }));

@@ -24,6 +24,6 @@ export default function CustomCardHeader({ model }) {
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: theme.palette.common.secondary.main,
   },
 }));

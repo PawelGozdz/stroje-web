@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   link: {
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    color: theme.palette.common.secondary.main
   }
 }));

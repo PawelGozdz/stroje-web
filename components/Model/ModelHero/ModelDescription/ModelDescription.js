@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import PhoneIcon from '@material-ui/icons/Phone';
 
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import * as _ from 'lodash';
 
 import { defaultPrize } from '../../../../utils/constants';
@@ -29,18 +30,27 @@ export default function ModelDescription({ model }) {
       <Costumes costumes={model.costumes} />
 
 
-      <ContactButtons />
+      <ContactButtons costumes={model.costumes} />
     </Box>
   )
 }
 
-const ContactButtons = () => {
+const ContactButtons = ({ costumes }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.content}>
-      <Typography className={classes.header}>Zarezerwuj</Typography>
-      <Typography paragraph className={classes.paragraph}>510510510</Typography>
+
+      {_.size(costumes) > 0 ? (
+        <Typography className={classes.header}>Zarezerwuj</Typography>
+      ) : (
+        <Typography className={classes.header}>Więcej informacji pod numerem:</Typography>
+      )}
+      <Typography paragraph className={classes.contact}>
+        <a href="tel:510510510" className={classes.phone}>
+          <PhoneIcon />510510510
+        </a>
+      </Typography>
     </Box>
   );
 };
@@ -116,9 +126,9 @@ const Costumes = ({ costumes }) => {
     <>
       <Box className={classes.content}>
         {many === 0 ? (
-          <Typography className={classes.header__false}>Zapytaj o dostępność telefonicznie lub mailowo</Typography>
+          <Typography className={classes.headerFalse}>Zapytaj o dostępność telefonicznie</Typography>
         ) : (
-          <Typography className={classes.header__true}>
+          <Typography className={classes.headerTrue}>
             Strój dostępny w ilości: {many} <br />
           </Typography>
         )}
@@ -143,7 +153,6 @@ const Costumes = ({ costumes }) => {
 const useStyles = makeStyles(theme => ({
   section: {
     ...theme.sections.section,
-    // background: 'linear-gradient( 109.6deg,  rgba(61,245,167,1) 11.2%, rgba(9,111,224,1) 91.1% );',
     alignItems: 'center',
   },
   container: {
@@ -163,11 +172,12 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1rem',
     fontWeight: 'bold',
   },
-  header__false: {
+  headerFalse: {
     fontWeight: 'bolder',
-    color: 'tomato !important'
+    color: theme.palette.common.secondary.main,
+    marginTop: theme.spacing(3)
   },
-  header__true: {
+  headerTrue: {
     fontWeight: 'bolder',
     color: `${theme.palette.common.primary.main} !important`
   },
@@ -175,18 +185,22 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.grey[600],
     flex: 1
   },
+  contact: {
+    fontWeight: 'bold',
+    display: 'block'
+  },
   content: {
     display: 'flex',
-    fleDirection: 'column'
+    fleDirection: 'column',
+    // alignItems: 'center'
   },
   sizesContent: {
     display: 'flex',
     fleDirection: 'row',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.only('xs')]: {
       flexDirection: 'column',
       flexBasis: 'auto',
     }
-
   },
   size__text: {
     marginBottom: '.25rem'
@@ -204,6 +218,22 @@ const useStyles = makeStyles(theme => ({
   reservationInfoMessage: {
     fontSize: '.65rem',
     color: theme.palette.grey[600],
-
-  }
+  },
+  phone: {
+    ...theme.customButtons.secondary,
+    display: 'flex',
+    alignItems: 'center',
+    background: theme.palette.common.secondary.main,
+    color: theme.palette.grey[50],
+    fontSize: '12px !important',
+    '&:not(:first-of-type)': {
+      marginRight: theme.spacing(2)
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '14px !important',
+    },
+    [theme.breakpoints.up('xl')]: {
+      fontSize: '16px !important',
+    },
+  },
 }));

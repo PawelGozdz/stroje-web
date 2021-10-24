@@ -13,11 +13,11 @@ export default function TopBar({ menu }) {
   return (
     <>
       <Logo indexPage={indexPageItem} />
-      <Box component='div' className={classes.searchLink} >
+      {/* <Box component='div' className={classes.searchLink} >
         <Link href={`/wyszukaj`} passHref>
           <a className={classes.centreIcon}><SearchIcon className={classes.searchIcon} /> {searchPageItem.item}</a>
         </Link>
-      </Box>
+      </Box> */}
     </>
   );
 }

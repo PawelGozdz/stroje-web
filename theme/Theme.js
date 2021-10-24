@@ -84,7 +84,7 @@ export default createTheme({
   },
   customButtons: {
     primary: formatButtons(lightBlue[500]),
-    secondary: formatButtons(deepPurple[500]),
+    secondary: formatButtons(ongSecondary),
     white: formatButtons(grey[50])
   },
   sections: {
@@ -115,7 +115,7 @@ function formatButtons(backgroundColor) {
     backgroundColor,
     textDecoration: 'none',
     padding: '.5rem',
-    borderRadius: '16px',
+    borderRadius: '2px',
     boxShadow: defaultTheme.shadows[4],
     transition: defaultTheme.transitions.create('transform', {
       duration: defaultTheme.transitions.duration.shortest,
