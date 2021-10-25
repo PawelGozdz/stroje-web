@@ -6,8 +6,6 @@ import { Container, Box, Divider } from '@mui/material';
 import ListMenu from './CategoryMenu';
 import { useAppContext } from '../../context/StateContext';
 
-
-
 export default function FloatingMenu() {
   const classes = useStyles();
 

@@ -1,26 +1,98 @@
-import { makeStyles, useTheme } from '@mui/styles';
-import { Container, AppBar, Toolbar, Grid, Avatar, Box, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Container, Divider } from '@mui/material';
+import * as _ from 'lodash';
+import { useAppContext } from '../../context/StateContext';
+import Address from './Address';
+import Categories from './Categories';
+import Partners from './Partners';
 
 export default function Footer() {
-  const classes = useStyles()();
+  const classes = useStyles();
+
+  const footerMenu = [
+    { title: 'Kategorie', values: useAppContext().categories },
+    {
+      title: 'Kontakt',
+      values: {
+        phones: ['788 479 789'],
+        email: 'agencja-reklamowa-impuls@wp.pl',
+        address: { street: 'ul. Owocowa 2', postCode: '27-200', city: 'Starachowice' }
+      }
+    },
+    {
+      title: 'Partnerzy',
+      values: [
+        {
+          title: 'Agencja Reklamowa Impuls', url: 'http://arimpuls.pl/'
+        }, {
+          title: 'Opieka Nad Grobami', url: 'http://opieka-nad-grobami.com/'
+        }
+      ]
+    },
+  ];
 
   return (
-    <Box component='footer' className={classes.footer}>
-      <Typography component='p'>Wypożyczalnia strojów karnawałowych</Typography>
-    </Box>
+    <Container maxWidth='xl' className={classes.container}>
+      <Categories categories={footerMenu[0]} />
+      <Divider className={classes.divider} orientation="vertical" variant="middle" flexItem />
+      <Address address={footerMenu[1]} />
+      <Divider className={classes.divider} orientation="vertical" variant="middle" flexItem />
+      <Partners partners={footerMenu[2]} />
+    </Container>
   )
 }
 
-function useStyles() {
-  return makeStyles(theme => ({
-    footer: {
-      minHeight: '4rem;',
+const useStyles = makeStyles(theme => ({
+  container: {
+    ...theme.container,
+    paddingTop: `${theme.spacing(3)}`,
+    paddingBottom: `${theme.spacing(3)}`,
+    background: `${theme.palette.common.primary.main} !important`,
+    color: theme.palette.grey[50],
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'flex-start',
+      alignItems: 'baseline',
+    },
+    '& h4': {
+      fontSize: '1.4rem',
       textAlign: 'center',
+      [theme.breakpoints.up('md')]: {
+        textAlign: 'left',
+        fontSize: '1.6rem',
+      }
+    },
+    '& ul': {
+      marginLeft: 0,
+      paddingLeft: 0,
+      listStyle: 'none',
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: 'auto',
-      marginBottom: theme.spacing(0)
+      [theme.breakpoints.up('md')]: {
+        alignItems: 'flex-start',
+      },
+      '& > *': {
+        display: 'flex',
+        justifyContent: 'center',
+        [theme.breakpoints.up('sm')]: {
+          justifyContent: 'flex-start',
+        }
+      },
+      '&:not(:last-child)': {
+        marginRight: theme.spacing(4)
+      }
     }
-  }));
-};
+  },
+  divider: {
+    display: 'none',
+    background: `${theme.palette.grey[50]} !important`,
+    width: '1px',
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4),
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex'
+    },
+  }
+}));

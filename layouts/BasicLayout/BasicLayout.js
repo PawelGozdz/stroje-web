@@ -39,22 +39,8 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[4],
     marginTop: 'auto'
   },
-  container: {
-    padding: 0,
-    maxWidth: 2000
-  },
   main: {
     flex: 1,
     maxWidth: '100%'
   },
-  logo: {
-    height: '6rem',
-    [theme.breakpoints.up('sm')]: {
-      height: '8rem',
-    }
-  },
-  toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: '2rem',
-  }
 }));
