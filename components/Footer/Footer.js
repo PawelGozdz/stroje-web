@@ -16,7 +16,7 @@ export default function Footer() {
       values: {
         phones: ['788 479 789'],
         email: 'agencja-reklamowa-impuls@wp.pl',
-        address: { street: 'ul. Owocowa 2', postCode: '27-200', city: 'Starachowice' }
+        address: { street: 'ul. Owocowa 3', postCode: '27-200', city: 'Starachowice' }
       }
     },
     {

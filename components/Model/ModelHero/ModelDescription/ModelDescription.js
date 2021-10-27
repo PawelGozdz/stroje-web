@@ -142,7 +142,7 @@ const Costumes = ({ costumes }) => {
 
           </Box>
           <Typography className={classes.header} paragraph>
-            REZERWACJE <span className={classes.reservationInfoMessage}>(***Kliknij w link z rozmiarem aby strapwdzić dostępność)</span>
+            REZERWACJE <span className={classes.reservationInfoMessage}>(***Kliknij w link z rozmiarem aby sprapwdzić dostępność)</span>
           </Typography>
         </>
       )}
