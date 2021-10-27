@@ -1,0 +1,25 @@
+#  Template NodeJS build
+
+#  This template allows you to validate your NodeJS code.
+#  The workflow allows running tests and code linting on the default branch.
+
+image: node:14-alpine
+
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Build
+            caches:
+              - node
+            script:
+              - apt-get update
+              - apt-get -qq install git-ftp
+              - git ftp init --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/home/agencja-impuls/websites/dev-client-react
+        - step:
+            name: Install & Build
+            script:
+              - npm install
+              - npm run build
+            caches:
+              - node
