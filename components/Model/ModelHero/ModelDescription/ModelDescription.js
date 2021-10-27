@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import PhoneIcon from '@material-ui/icons/Phone';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 import { Box, Typography } from '@mui/material';
 import * as _ from 'lodash';

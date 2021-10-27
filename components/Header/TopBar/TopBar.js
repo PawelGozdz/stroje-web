@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/material';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@mui/icons-material/Search';
 import * as _ from 'lodash';
 
 export default function TopBar({ menu }) {

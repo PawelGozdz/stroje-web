@@ -5,13 +5,13 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useMediaQuery, Box, Typography } from '@mui/material';
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Menu({ menu }) {
   const theme = useTheme();
