@@ -13,10 +13,9 @@ pipelines:
           script:
             - npm install
             - npm run build
-            - cp -a .next .
-          # artifacts:
-          #   - .next/**
-          #   - node_modules/**
+          artifacts:
+            - .next/**
+            - node_modules/**
           caches:
             - node
             - nextcache 
