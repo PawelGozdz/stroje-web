@@ -26,6 +26,6 @@ pipelines:
             - apt-get update
             - apt-get -qq install git-ftp
             - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/websites/dev-client-react
-  definitions:
-    caches:
-      nextcache: .next/cache
+definitions:
+  caches:
+    nextcache: .next/cache
