@@ -3,23 +3,29 @@
 #  This template allows you to validate your NodeJS code.
 #  The workflow allows running tests and code linting on the default branch.
 
-image: node:14
+
 
 pipelines:
   default:
       - step:
+          image: node:14
           name: Install & Build
           script:
             - npm install
             - npm run build
-            - mkdir .next
-          artifacts:
-          - .next/**
+            - cp -a .next .
+          # artifacts:
+          #   - .next/**
+          #   - node_modules/**
           caches:
             - node
+            - nextcache 
       - step:
           name: Deploy to FTP
           script:
             - apt-get update
             - apt-get -qq install git-ftp
             - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/websites/dev-client-react
+  definitions:
+    caches:
+      nextcache: .next/cache
