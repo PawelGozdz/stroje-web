@@ -8,20 +8,18 @@ image: node:14
 pipelines:
   default:
       - step:
-          name: Build
+          name: Install & Build
+          script:
+            - npm install
+            - npm run build
+          artifacts:
+          - .next/**
           caches:
             - node
+      - step:
+          name: Build
+          image: samueldebruyn/debian-git
           script:
             - apt-get update
             - apt-get -qq install git-ftp
-            - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/websites/dev-client-react
-      - step:
-          name: Install & Build
-          image: samueldebruyn/debian-git
-          script:
-            - npm install --legacy-peer-deps
-            - npm run build
-          artifacts:
-            - .next/**
-          # caches:
-          #   - node
+            - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/home/agencja-impuls/websites/dev-client-react
