@@ -12,6 +12,7 @@ pipelines:
           script:
             - npm install
             - npm run build
+            - mkdir .next
           artifacts:
           - .next/**
           caches:
