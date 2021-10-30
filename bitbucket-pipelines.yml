@@ -17,8 +17,7 @@ pipelines:
           caches:
             - node
       - step:
-          name: Build
-          image: samueldebruyn/debian-git
+          name: Deploy to FTP
           script:
             - apt-get update
             - apt-get -qq install git-ftp
