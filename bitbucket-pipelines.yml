@@ -13,9 +13,9 @@ pipelines:
           script:
             - npm install
             - npm run build
+            - cp -R .next next-cp
           artifacts:
             - .next/**
-            - node_modules/**
           caches:
             - node
             - nextcache 
@@ -25,6 +25,9 @@ pipelines:
             - apt-get update
             - apt-get -qq install git-ftp
             - git ftp init --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/websites/dev-client-react
+            - cd /websites/dev-client-react
+            - cp -R next-cp .next
+            - npm i
 definitions:
   caches:
     nextcache: .next/cache
