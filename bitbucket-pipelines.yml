@@ -27,7 +27,7 @@ pipelines:
             - git ftp push --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://agencja-impuls.atthost24.pl/websites/dev-client-react
             # - cd /websites/dev-client-react
             # - cp -R next-cp .next
-            # - npm i
+            - npm i
             - npm run build
 # definitions:
 #   caches:
