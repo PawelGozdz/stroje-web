@@ -1,4 +1,4 @@
-export const BASE_PATH = 'http://dev-api-stroje.agencja-impuls.atthost24.pl';
+export const BASE_PATH = 'http://api-stroje.agencja-impuls.atthost24.pl';
 export const TOKEN = 'accessToken';
 
 export const menu = [{
