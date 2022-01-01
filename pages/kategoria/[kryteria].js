@@ -74,7 +74,6 @@ export default function Model() {
         </Box>
       )}
 
-
       <Pagination
         page={query.page ? parseInt(query.page) : 1}
         total={count}

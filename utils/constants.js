@@ -3,11 +3,12 @@ export const TOKEN = 'accessToken';
 
 export const menu = [{
   "item": "Strona główna", "url": "", "opis": "Strona główna"
-}, {
-  "item": "Wyszukaj", "url": "wyszukaj", "opis": "Wyszukiwarka strojów",
-}, {
-  "item": "Kontakt", "url": "kontakt", "opis": "Strona kontaktowa",
-}
+},
+  // {
+  //   "item": "Wyszukaj", "url": "wyszukaj", "opis": "Wyszukiwarka strojów",
+  // }, {
+  //   "item": "Kontakt", "url": "kontakt", "opis": "Strona kontaktowa",
+  // }
 ]
 
 export const defaultPrize = 25;

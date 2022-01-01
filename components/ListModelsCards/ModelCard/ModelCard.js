@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Grid, Typography, Box } from '@mui/material';
-import clsx from 'clsx';
+import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Image from '../../Image';
 import * as _ from 'lodash';
 import CustomCardHeader from './CustomCardHeader';
 import CustomCardContent from './CustomCardContent';
+import CustomActions from '../../CustomCollapse/CustomActions';
+import CustomCollapse from '../../CustomCollapse/CustomCollapse';
 
 export default function ModelCard({ model }) {
   const [expanded, setExpanded] = useState(false);
@@ -22,6 +19,8 @@ export default function ModelCard({ model }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const title = 'Rozwiń sczegóły';
 
   return (
     <Grid component='li' item xs={12} sm={6} md={4} lg={2} className={classes.li}>
@@ -42,6 +41,7 @@ export default function ModelCard({ model }) {
         <CustomActions
           handleExpandClick={handleExpandClick}
           expanded={expanded}
+          title={title}
         />
 
         <CustomCollapse expanded={expanded}>
@@ -51,36 +51,6 @@ export default function ModelCard({ model }) {
     </Grid>
   );
 }
-
-const CustomCollapse = ({ expanded, children }) => {
-  return (
-    <Collapse in={expanded} timeout="auto" unmountOnExit>
-      {_.size(children) > 0 && children}
-    </Collapse>
-  );
-};
-
-const CustomActions = ({ handleExpandClick, expanded }) => {
-  const classes = useStyles();
-
-  return (
-    <CardActions disableSpacing className={classes.actions}>
-      <Typography variant="body2" color="textSecondary" component="p">
-        Rozwiń sczegóły
-      </Typography>
-      <IconButton
-        className={clsx(classes.expand, {
-          [classes.expandOpen]: expanded,
-        })}
-        onClick={handleExpandClick}
-        aria-expanded={expanded}
-        aria-label="show more"
-      >
-        <ExpandMoreIcon />
-      </IconButton>
-    </CardActions>
-  );
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {

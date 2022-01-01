@@ -19,7 +19,7 @@ export default function SameCategory({ model }) {
         <Typography variant='h5' component='h4' className={classes.sectionSubHeader}>
           {
             _.size(model.categories) > 0 &&
-            _.map(model.categories, c => c.kategoria)[0]
+            _.map(model.categories, c => c.kategoria).join(', ')
           }
         </Typography>
 

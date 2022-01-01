@@ -57,9 +57,11 @@ const useStyles = makeStyles(theme => ({
   buttons: {
     paddingBottom: theme.spacing(3),
     display: 'flex',
+    flexWrap: 'wrap',
     alignContent: 'flex-start',
     '& > *:not(:last-child)': {
-      marginRight: theme.spacing(2)
+      marginRight: theme.spacing(2),
+      marginBottom: theme.spacing(3),
     },
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(1),
@@ -70,6 +72,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '0.7rem'
     },
-    color: theme.palette.grey[50]
+    color: theme.palette.grey[50],
   },
 }));

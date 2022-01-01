@@ -12,7 +12,7 @@ export default function ListModels({ models }) {
   return (
     <Grid container className={classes.list} spacing={2} component='ul' className={classes.list} >
       {_.size(models) > 0 && _.map(models, model => (
-        <ModelCard model={model} key={model.tytul} />
+        <ModelCard model={model} key={model.url} />
       ))}
     </Grid>
   )
