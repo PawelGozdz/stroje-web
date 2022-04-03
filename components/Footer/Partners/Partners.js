@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     ...theme.container
   },
   link: {
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    marginBottom: theme.spacing(1)
   }
 }));

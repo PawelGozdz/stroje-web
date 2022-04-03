@@ -11,11 +11,11 @@ import * as qs from 'qs';
 import ModelHero from '../components/Model/ModelHero';
 import ModelSlides from '../components/Model/ModelHero/ModelSlides';
 import ModelDescription from '../components/Model/ModelHero/ModelDescription';
-import SameCategory from '../components/Model/SameCategory';
+import {SameCategory} from '../components/Model/SameCategory';
 import FloatingMenu from '../components/FloatingMenu';
 import BreadCrumbs from '../components/BreadCrumbs';
 
-export default function Model() {
+export default function Model({ data }) {
   const classes = useStyles();
 
   const [model, setModel] = useState(null);
@@ -26,16 +26,11 @@ export default function Model() {
   useEffect(() => {
     (async () => {
       setLoader(true);
-
-      const buildQuery = qs.stringify({ _where: { 'url': query.model } });
-
-      const response = await getModelByCustomProps(buildQuery);
-
-      setModel(response[0]);
+      setModel(data?.[0]);
       setLoader(false);
     })();
   }, [query]);
-
+  
   return (
     <BasicLayout>
       <FloatingMenu />
@@ -60,6 +55,15 @@ export default function Model() {
 
     </BasicLayout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const buildQuery = qs.stringify({ _where: { 'url': context.query.model } });
+  const data = await getModelByCustomProps(buildQuery);
+
+  return {
+    props: { data } 
+  }
 }
 
 const useStyles = makeStyles(theme => ({

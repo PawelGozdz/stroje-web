@@ -47,13 +47,14 @@ const useStyles = makeStyles(theme => ({
     ...theme.container,
     paddingTop: `${theme.spacing(3)}`,
     paddingBottom: `${theme.spacing(3)}`,
-    background: `${theme.palette.common.primary.main} !important`,
-    color: theme.palette.grey[50],
     justifyContent: 'center',
     alignItems: 'center',
     [theme.breakpoints.up('md')]: {
       justifyContent: 'flex-start',
       alignItems: 'baseline',
+    },
+    '& > *': {
+      marginTop: theme.spacing(3)
     },
     '& h4': {
       fontSize: '1.4rem',

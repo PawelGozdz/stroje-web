@@ -1,19 +1,29 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Box, Typography } from '@mui/material';
-import * as _ from 'lodash';
+import { size, map, chunk } from 'lodash';
 import Link from 'next/link';
 
 export default function FooterCategoriesList({ categories }) {
   const classes = useStyles();
 
+  const categoriesInChunk = chunk(categories.values, 8);
+  
   return (
     <Box>
       <Typography component='h4'>{categories.title}</Typography>
-      <Box component='ul' className={classes.list}>
+      <Box className={classes.listContainer}>
         {
-          _.size(categories.values) > 0 &&
-          _.map(categories.values, item => <Categoria item={item} key={item.kategoria} />)
+          size(categoriesInChunk) > 0 && (
+            map(categoriesInChunk, (categoriesChunk, i) => (
+              <Box component='ul' key={i} className={classes.list}>
+                {
+                  categoriesChunk &&
+                  map(categoriesChunk, item => <Categoria item={item} key={item.kategoria} />)
+                }
+              </Box>
+            ))
+          )
         }
       </Box>
     </Box>
@@ -37,6 +47,9 @@ const useStyles = makeStyles(theme => ({
   container: {
     ...theme.container
   },
+  listContainer: {
+    display: 'flex'
+  },
   footer: {
     minHeight: '4rem;',
     textAlign: 'center',
@@ -47,6 +60,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(0)
   },
   link: {
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    marginBottom: theme.spacing(1)
   }
 }));

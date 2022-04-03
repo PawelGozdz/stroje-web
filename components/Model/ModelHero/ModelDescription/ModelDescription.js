@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { defaultPrize } from '../../../../utils/constants';
 import ElementIcon from '../../../CustomIcons/ElementIcon';
 import ModelSizesAccordion from '../../ModelAccordion';
+import { CONTACT_PHONES } from '../../../../constants/constants'
 
 export default function ModelDescription({ model }) {
   const classes = useStyles();
@@ -46,11 +47,15 @@ const ContactButtons = ({ costumes }) => {
       ) : (
         <Typography className={classes.header}>Więcej informacji pod numerem:</Typography>
       )}
-      <Typography paragraph className={classes.contact}>
-        <a href="tel:510510510" className={classes.phone}>
-          <PhoneIcon />510510510
-        </a>
-      </Typography>
+        <Box className={classes.buttonGroup}>
+          {_.map(CONTACT_PHONES, phone => (
+            <a href={`tel:${phone}`} key={phone} className={classes.phone}>
+              <PhoneIcon />{phone}
+            </a>
+          ))}
+        </Box>
+      {/* <Typography paragraph className={classes.contact}>
+      </Typography> */}
     </Box>
   );
 };
@@ -225,6 +230,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     background: theme.palette.common.secondary.main,
     color: theme.palette.grey[50],
+    marginRight: theme.spacing(1),
     fontSize: '12px !important',
     '&:not(:first-of-type)': {
       marginRight: theme.spacing(2)
@@ -236,4 +242,13 @@ const useStyles = makeStyles(theme => ({
       fontSize: '16px !important',
     },
   },
+  buttonGroup: {
+    display: 'flex',
+    [theme.breakpoints.only('xs')]: {
+      flexDirection: 'column',
+      '& > *': {
+        marginTop: theme.spacing(1)
+      },
+    },
+  }
 }));

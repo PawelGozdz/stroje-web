@@ -30,20 +30,21 @@ export default function SameTypeList({ model }) {
 
       const where = {
         _where: [
-          { 'categories.kategoria_in': model.categories.map(c => c.kategoria) },
-          { 'url_nin': model.url }
+          { 'url_nin': model.url },
+          { 'plec.url': model.plec.url }
         ]
       };
+
       const getModels = qs
         .stringify({
           ...buildQuery,
           ...where
         });
 
+      const getModelCount = qs.stringify({ ...where });
+
       const response = await getModelByCustomProps(getModels);
-      const responseCount = await getModelByCustomPropsCount(
-        qs.stringify(where)
-      );
+      const responseCount = await getModelByCustomPropsCount(getModelCount);
 
       setModels(response || null);
       setCount(responseCount || null);

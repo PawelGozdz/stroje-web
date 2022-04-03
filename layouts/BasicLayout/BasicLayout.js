@@ -37,7 +37,8 @@ const useStyles = makeStyles(theme => ({
   footer: {
     width: '100%',
     boxShadow: theme.shadows[4],
-    marginTop: 'auto'
+    marginTop: 'auto',
+    background: theme.palette.grey[100],
   },
   main: {
     flex: 1,

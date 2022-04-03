@@ -1,30 +1,25 @@
 import React from 'react';
-import { Container, Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import * as _ from 'lodash';
+import { size } from 'lodash';
 
 import SameTypeList from '../ModelHero/SameTypeList';
+import { SameCategoriesItemList } from './';
+import { MORE_IN_CATEGORIES } from '../../../constants/constants';
 
-export default function SameCategory({ model }) {
+export function SameCategory({ model }) {
   const classes = useStyles();
 
   return (
     <Box component='section' className={classes.section} id='sameCategory'>
-      <Container maxWidth='lg' className={classes.container}>
-
-        <Typography variant='h4' component='h3' className={classes.sectionHeader}>
-          Więcej z kategorii...
-        </Typography>
-
-        <Typography variant='h5' component='h4' className={classes.sectionSubHeader}>
-          {
-            _.size(model.categories) > 0 &&
-            _.map(model.categories, c => c.kategoria).join(', ')
-          }
-        </Typography>
-
-      </Container>
-
+      <Typography variant='h4' component='h3' className={classes.sectionHeader}>
+        {MORE_IN_CATEGORIES}
+      </Typography>
+      {
+        model && size(model.categories) > 0 && (
+          <SameCategoriesItemList categories={model.categories} />
+        )
+      }
       <SameTypeList model={model} />
     </Box>
   )
