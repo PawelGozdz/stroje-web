@@ -11,6 +11,7 @@ import CustomActions from '../../CustomCollapse/CustomActions';
 import CustomCollapse from '../../CustomCollapse/CustomCollapse';
 
 export default function ModelCard({ model }) {
+
   const [expanded, setExpanded] = useState(false);
   const classes = useStyles();
 
@@ -26,7 +27,7 @@ export default function ModelCard({ model }) {
     <Grid component='li' item xs={12} sm={6} md={4} lg={2} className={classes.li}>
       <Card className={classes.root}>
         <CustomCardHeader model={model} />
-        <Link href={`/${model.url}`} passHref>
+        <Link href={`/${model.type}/${model.url}`} passHref>
           <a>
             <Image
               src={hasPhotos ? model.zdjecia[0].url : ''}

@@ -14,7 +14,7 @@ import { getModelByCustomProps, getModelByCustomPropsCount } from '../../api/mod
 import { limitPerPage, getStartItem } from '../../utils/fetch';
 import EmptyBar from '../../components/EmptyBar';
 import {CategoryLinkItem} from '../../components/Model/SameCategory'
-import { MORE_IN_CATEGORIES } from '../../constants/constants';
+import { MORE_IN_CATEGORIES } from '../../utils/constants';
 
 export default function Model({ modelsArr, modelsCount }) {
   const classes = useStyles();

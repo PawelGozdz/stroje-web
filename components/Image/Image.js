@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'material-ui-image';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import { useMediaQuery } from '@mui/material';
 import * as _ from 'lodash';
 

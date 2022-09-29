@@ -8,10 +8,15 @@ import * as _ from 'lodash';
 import { defaultPrize } from '../../../../utils/constants';
 import ElementIcon from '../../../CustomIcons/ElementIcon';
 import ModelSizesAccordion from '../../ModelAccordion';
-import { CONTACT_PHONES } from '../../../../constants/constants'
+import { CONTACT_PHONES } from '../../../../utils/constants'
 
-export default function ModelDescription({ model }) {
+export default function ModelDescription({ model, pageSettings, globalSettings: { settings } }) {
   const classes = useStyles();
+
+  // cena_promo > cena_modelu > cena_globalna
+
+  const settingPrice = 'price.price';
+  const price = model.cena || settings.find(s => s.__component === settingPrice && s.name === 'Nakrycia głowy')?.price || null;
 
   return (
     <Box
@@ -23,17 +28,32 @@ export default function ModelDescription({ model }) {
 
       {model.opis && <Description opis={model.opis} />}
 
-      <Price prize={model.cena} />
+      {typeof price === 'number' && <Price price={price} />}
       <Colors colors={model.colors} />
 
       {_.size(model.parts) > 0 && <Parts parts={model.parts} />}
 
-      <Costumes costumes={model.costumes} />
+      {/* <Costumes costumes={model.costumes} /> */}
 
+      <ProductId id={model.id} />
 
       <ContactButtons costumes={model.costumes} />
     </Box>
   )
+}
+
+const ProductId = ({ id }) => {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.content}>
+      <Typography className={classes.header}>Kod produktu:
+        <Typography variant='span' className={classes.id}>
+          {` ` + id}
+        </Typography>
+      </Typography>
+    </Box>
+  );
 }
 
 const ContactButtons = ({ costumes }) => {
@@ -47,25 +67,25 @@ const ContactButtons = ({ costumes }) => {
       ) : (
         <Typography className={classes.header}>Więcej informacji pod numerem:</Typography>
       )}
-        <Box className={classes.buttonGroup}>
-          {_.map(CONTACT_PHONES, phone => (
-            <a href={`tel:${phone}`} key={phone} className={classes.phone}>
-              <PhoneIcon />{phone}
-            </a>
-          ))}
-        </Box>
+      <Box className={classes.buttonGroup}>
+        {_.map(CONTACT_PHONES, phone => (
+          <a href={`tel:${phone}`} key={phone} className={classes.phone}>
+            <PhoneIcon />{phone}
+          </a>
+        ))}
+      </Box>
       {/* <Typography paragraph className={classes.contact}>
       </Typography> */}
     </Box>
   );
 };
 
-const Price = (prize) => {
+const Price = ({ price }) => {
   const classes = useStyles();
 
   const number = _
-    .isNumber(prize)
-    ? Number(prize).toFixed(2)
+    .isNumber(price)
+    ? Number(price).toFixed(2)
     : Number(defaultPrize).toFixed(2);
 
   return (
@@ -176,6 +196,10 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1.5),
     fontSize: '1rem',
     fontWeight: 'bold',
+  },
+  id: {
+    color: theme.palette.common.primary.main,
+    fontSize: '1.75rem',
   },
   headerFalse: {
     fontWeight: 'bolder',

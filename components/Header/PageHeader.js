@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Container, Toolbar } from '@mui/material';
 import TopBar from './TopBar';
 import Menu from './Menu';
 import { menu } from '../../utils/constants';
 
-export default function Header() {
+export default function PageHeader() {
   const classes = useStyles();
 
   return (
@@ -21,7 +20,6 @@ export default function Header() {
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
-    // minHeight: 100,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",

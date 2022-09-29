@@ -1,11 +1,8 @@
 import { BASE_PATH } from '../utils/constants';
 
-export async function getModelsApi({ limit = '', sort = '', page = '' }) {
+export async function getModelsApi(query) {
   try {
-    const limitItems = `_limit=${limit}`;
-    const sortItems = `_sort=${sort}`;
-    const startItems = `_start=${page}`;
-    const url = `${BASE_PATH}/models?${limitItems}&${sortItems}&${startItems}&_publicationState=live`;
+    const url = `${BASE_PATH}/models?${query}&_publicationState=live`;
 
     const response = await fetch(url);
     const result = await response.json();

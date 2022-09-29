@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 
 export default function Testimonials() {
   const classes = useStyles()();
-  console.log(classes);
 
   const TestimonialsMap = dynamic(
     () => import('../TestimonialMap'), // replace '@components/map' with your component's location

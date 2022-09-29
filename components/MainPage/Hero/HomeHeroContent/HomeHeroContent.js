@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     order: 2,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       alignItems: 'center',
       textAlign: 'center',
       order: 1,

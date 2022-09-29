@@ -19,6 +19,7 @@ export function SameCategoriesItemList(props) {
 const useStyles = makeStyles(theme => ({
   categoryList: {
     display: 'flex',
+    flexWrap: 'wrap',
     flexGrow: 0
   },
 }));

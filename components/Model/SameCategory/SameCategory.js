@@ -5,7 +5,7 @@ import { size } from 'lodash';
 
 import SameTypeList from '../ModelHero/SameTypeList';
 import { SameCategoriesItemList } from './';
-import { MORE_IN_CATEGORIES } from '../../../constants/constants';
+import { MORE_IN_CATEGORIES } from '../../../utils/constants';
 
 export function SameCategory({ model }) {
   const classes = useStyles();
@@ -17,7 +17,9 @@ export function SameCategory({ model }) {
       </Typography>
       {
         model && size(model.categories) > 0 && (
-          <SameCategoriesItemList categories={model.categories} />
+          <Box className={classes.listWrapper}>
+            <SameCategoriesItemList categories={model.categories} />
+          </Box>
         )
       }
       <SameTypeList model={model} />
@@ -36,5 +38,8 @@ const useStyles = makeStyles(theme => ({
   },
   sectionSubHeader: {
     color: theme.palette.grey[500]
+  },
+  listWrapper: {
+    display: 'flex',
   },
 }));

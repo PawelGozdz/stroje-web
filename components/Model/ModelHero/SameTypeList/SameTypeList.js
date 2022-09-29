@@ -38,7 +38,7 @@ export default function SameTypeList({ model }) {
       const getModels = qs
         .stringify({
           ...buildQuery,
-          ...where
+          ...where,
         });
 
       const getModelCount = qs.stringify({ ...where });
