@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Typography, CircularProgress } from '@mui/material';
+import { Container, Box, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useRouter } from 'next/router';
 import * as qs from 'qs';
@@ -31,7 +31,8 @@ export default function SameTypeList({ model }) {
       const where = {
         _where: [
           { 'url_nin': model.url },
-          { 'plec.url': model.plec.url }
+          { 'plec.url': model.plec.url },
+          { type: model.type }
         ]
       };
 
@@ -60,11 +61,13 @@ export default function SameTypeList({ model }) {
           : _.size(models) > 0 && <ListModelsCards models={models} />
         }
       </Container>
-      <Pagination
-        page={query.page ? parseInt(query.page) : 1}
-        total={count}
-        limitPerPage={limitPerPage(query)}
-      />
+      {models?.length > 0 &&
+        <Pagination
+          page={query.page ? parseInt(query.page) : 1}
+          total={count}
+          limitPerPage={limitPerPage(query)}
+        />
+      }
     </Box>
   )
 }

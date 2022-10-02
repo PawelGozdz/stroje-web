@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, CircularProgress, Container } from '@mui/material';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@mui/styles';
 
@@ -8,13 +8,8 @@ import * as _ from 'lodash';
 import ModelHero from '../ModelHero';
 import ModelSlides from '../ModelHero/ModelSlides';
 import ModelDescription from '../ModelHero/ModelDescription';
-import { SameCategory } from '../SameCategory';
 
-export default function PageModel({ modelProps, pageProps, globalProps }) {
-
-    if (!modelProps) return (
-        <p>Coś jest nie tak :(</p>
-    );
+export default function PageModel({ modelProps, pageProps, globalProps, children }) {
 
     const pagePropsData = pageProps?.[0] || null;
     const globalPropsData = globalProps?.[0] || null;
@@ -34,6 +29,20 @@ export default function PageModel({ modelProps, pageProps, globalProps }) {
         })();
     }, [query]);
 
+    if (!model) {
+        return (
+            <>
+                {!model && (
+                    <Box component='section' className={classes.section}>
+                        <Container maxWidth='xl' className={classes.container}>
+                            <Typography variant='h3'>Nie znaleziono takiego stroju/dodatku</Typography>
+                        </Container>
+                    </Box>
+                )}
+            </>
+        )
+    }
+
     return (
         <>
             {(loader || !model) ? (
@@ -45,13 +54,7 @@ export default function PageModel({ modelProps, pageProps, globalProps }) {
                 </ModelHero>
             )}
 
-            {model && (
-                <Box component='section' className={classes.section}>
-                    <Container maxWidth='xl' className={classes.container}>
-                        <SameCategory model={model} />
-                    </Container>
-                </Box>
-            )}
+            {children}
         </>
     )
 }

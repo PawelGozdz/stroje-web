@@ -53,8 +53,11 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'flex-start',
-      flexDirection: 'row',
+      flexDirection: 'column',
       marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(1),
+    },
+    '& > li': {
       marginBottom: theme.spacing(1),
     },
     '& > li:not(:last-child)': {

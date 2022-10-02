@@ -27,7 +27,6 @@ export default function Services() {
         _start: page
       });
       const response = await getModelsApi(qsQuery);
-      console.log(response)
 
       setModels(response || []);
       setLoader(false);

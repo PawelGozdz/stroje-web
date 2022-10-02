@@ -16,7 +16,7 @@ export default function ModelDescription({ model, pageSettings, globalSettings: 
   // cena_promo > cena_modelu > cena_globalna
 
   const settingPrice = 'price.price';
-  const price = model.cena || settings.find(s => s.__component === settingPrice && s.name === 'Nakrycia głowy')?.price || null;
+  const price = model.cena || settings.find(s => s.__component === settingPrice && s.name?.toLowerCase() === model.type?.toLowerCase())?.price || null;
 
   return (
     <Box

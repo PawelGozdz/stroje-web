@@ -13,23 +13,28 @@ import Pagination from '../../components/Pagination';
 import { getModelByCustomProps, getModelByCustomPropsCount } from '../../api/model';
 import { limitPerPage, getStartItem } from '../../utils/fetch';
 import EmptyBar from '../../components/EmptyBar';
-import {CategoryLinkItem} from '../../components/Model/SameCategory'
+import { CategoryLinkItem } from '../../components/Model/SameCategory'
 import { MORE_IN_CATEGORIES } from '../../utils/constants';
+import { getDModelsByCustomProps, getDModelsByCustomPropsCount } from '../../api/d-model';
 
-export default function Model({ modelsArr, modelsCount }) {
+export default function Model({ modelsArr, modelsCount, modelsDArr, modelsDCount }) {
   const classes = useStyles();
   const { query } = useRouter();
 
   const [models, setModels] = useState(null);
+  const [modelsD, setModelsD] = useState(null);
   const [loader, setLoader] = useState(false);
   const [count, setCount] = useState(null);
+  const [countD, setCountD] = useState(null);
 
   useEffect(() => {
     (async () => {
       setLoader(true);
-      
+
       setModels(modelsArr);
       setCount(modelsCount);
+      setModelsD(modelsDArr);
+      setCountD(modelsDCount);
 
       setLoader(false);
     })();
@@ -44,11 +49,12 @@ export default function Model({ modelsArr, modelsCount }) {
       <Box component='section' className={classes.section} id='wyszukaj-kategoria'>
         <Container maxWidth='xl' className={classes.container}>
 
-          <Typography variant='h4' component='h3' className={classes.sectionHeader}>
-            { MORE_IN_CATEGORIES }
-          </Typography>
-
-          { category && (<CategoryLinkItem category={category}/>)}
+          {category ? (<CategoryLinkItem category={category} />) : (
+            <Box component='section' className={classes.section}>
+              <Container maxWidth='xl' className={classes.container}>
+                <Typography variant='h3'>Nie znaleziono przedmiotów pasujących do tej kategorii</Typography>
+              </Container>
+            </Box>)}
 
         </Container>
       </Box>
@@ -64,16 +70,20 @@ export default function Model({ modelsArr, modelsCount }) {
         </Box>
       )}
 
-      <Pagination
-        page={query.page ? parseInt(query.page) : 1}
-        total={count}
-        limitPerPage={limitPerPage(query)}
-      />
+      {category && (
+        <Pagination
+          page={query.page ? parseInt(query.page) : 1}
+          total={count}
+          limitPerPage={limitPerPage(query)}
+        />
+      )}
 
       <EmptyBar />
     </BasicLayout>
   )
 }
+
+//TODO: dodać sekcję, żeby można było wrzucać i dodatki, i modele
 
 export async function getServerSideProps(context) {
   const query = context.query;
@@ -83,19 +93,31 @@ export async function getServerSideProps(context) {
     _start: getStartItem(query),
   };
 
-  const response = await getModelByCustomProps(
+  const getResponse = getModelByCustomProps(
     qs.stringify({ ...buildQuery, _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
   );
 
-  const responseCount = await getModelByCustomPropsCount(
+  const getResponseCount = getModelByCustomPropsCount(
     qs.stringify({ _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
   );
 
+  const getResponseD = getDModelsByCustomProps(
+    qs.stringify({ ...buildQuery, _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
+  );
+
+  const getResponseDCount = getDModelsByCustomPropsCount(
+    qs.stringify({ _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
+  );
+
+  const [response, responseCount, responseD, responseDCount] = await Promise.all([getResponse, getResponseCount, getResponseD, getResponseDCount])
+
   return {
-    props: { 
+    props: {
       modelsArr: response,
-      modelsCount: responseCount
-    } 
+      modelsCount: responseCount,
+      modelsDArr: responseD,
+      mozelsDCount: responseDCount,
+    }
   }
 }
 

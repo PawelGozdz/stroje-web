@@ -2,22 +2,35 @@ import React from 'react';
 import BasicLayout from '../../layouts/BasicLayout';
 
 import { getModelByCustomProps } from '../../api/model';
-import * as qs from 'qs';
+import { Box, Container } from '@mui/material';
 
+import * as qs from 'qs';
+import { makeStyles } from '@mui/styles';
+
+import { SameCategory } from '../../components/Model/SameCategory'
 import FloatingMenu from '../../components/FloatingMenu';
 import BreadCrumbs from '../../components/BreadCrumbs';
-import { getGlobalProps } from '../../api/global';
 import { getPageProps } from '../../api/pages';
 import PageModel from '../../components/Model/PageModel';
+import { getGlobalProps } from '../../api/global';
 
 export default function Model({ model, pageProps, globalProps }) {
+  const classes = useStyles();
 
   return (
     <BasicLayout>
       <FloatingMenu />
       <BreadCrumbs />
 
-      <PageModel modelProps={model?.[0]} pageProps={pageProps} globalProps={globalProps} />
+      <PageModel modelProps={model} pageProps={pageProps} globalProps={globalProps} >
+        {model && (
+          <Box component='section' className={classes.section}>
+            <Container maxWidth='xl' className={classes.container}>
+              <SameCategory model={model} />
+            </Container>
+          </Box>
+        )}
+      </PageModel>
 
     </BasicLayout>
   )
@@ -39,10 +52,35 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      model: modelData,
+      model: modelData?.[0] || null,
       pageProps: pagePropsData,
       globalProps: globalPropsData,
     }
   }
 }
 
+const useStyles = makeStyles(theme => ({
+  spaceFiller: {
+    minHeight: '50vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  section: {
+    ...theme.sections.section,
+    paddingTop: theme.spacing(4),
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.spacing(7),
+    }
+  },
+  container: {
+    ...theme.container,
+    display: 'block'
+  },
+  sectionSubHeader: {
+    color: theme.palette.grey[500]
+  },
+  listWrapper: {
+    display: 'flex',
+  },
+}));
