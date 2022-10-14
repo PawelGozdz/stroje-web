@@ -10,12 +10,13 @@ import ListModelCards from '../../components/ListModelsCards';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import FloatingMenu from '../../components/FloatingMenu';
 import Pagination from '../../components/Pagination';
-import { getModelByCustomProps, getModelByCustomPropsCount } from '../../api/model';
+import { getModelsByCustomProps, getModelsByCustomPropsCount } from '../../api/model';
 import { limitPerPage, getStartItem } from '../../utils/fetch';
 import EmptyBar from '../../components/EmptyBar';
 import { CategoryLinkItem } from '../../components/Model/SameCategory'
-import { MORE_IN_CATEGORIES } from '../../utils/constants';
 import { getDModelsByCustomProps, getDModelsByCustomPropsCount } from '../../api/d-model';
+import Seo from '../../components/Seo/Seo';
+import { useAppContext } from '../../context/StateContext';
 
 export default function Model({ modelsArr, modelsCount, modelsDArr, modelsDCount }) {
   const classes = useStyles();
@@ -40,25 +41,68 @@ export default function Model({ modelsArr, modelsCount, modelsDArr, modelsDCount
     })();
   }, [query]);
 
-  const category = models?.[0]?.categories?.[0];
+  const category = query.kryteria;
+  const { categories } = useAppContext();
+  const cat = categories.find(c => c.url.toLowerCase() === category.toLowerCase());
 
   return (
     <BasicLayout>
+      <Seo />
       <FloatingMenu />
       <BreadCrumbs />
-      <Box component='section' className={classes.section} id='wyszukaj-kategoria'>
-        <Container maxWidth='xl' className={classes.container}>
 
-          {category ? (<CategoryLinkItem category={category} />) : (
-            <Box component='section' className={classes.section}>
-              <Container maxWidth='xl' className={classes.container}>
-                <Typography variant='h3'>Nie znaleziono przedmiotów pasujących do tej kategorii</Typography>
-              </Container>
-            </Box>)}
+      <SectionHeader category={category} type='stroje' />
+      <SectionDisplay category={category} loader={loader} models={models} query={query} count={count} />
 
-        </Container>
-      </Box>
+      <EmptyBar />
 
+
+      <EmptyBar />
+    </BasicLayout>
+  )
+}
+
+// TODO: zrobić, aby sie wyświetlały kategorie i napis np Stroje/Dodatki z kategorii
+
+const SectionHeader = ({ category, type }) => {
+  const classes = useStyles();
+
+  return (
+    <Box component='section' className={classes.section}>
+      <Container maxWidth='xl' className={classes.container}>
+
+        {category ? (<CategoryLinkItem category={category} type={type} />) : (
+          <Box component='section' className={classes.section}>
+            <Container maxWidth='xl' className={classes.container}>
+              <Typography variant='h3'>Nie znaleziono przedmiotów pasujących do kategorii {category}</Typography>
+            </Container>
+          </Box>)}
+
+      </Container>
+    </Box>
+  )
+}
+
+const SectionPagination = ({ category, query, count }) => {
+
+  return (
+    <>
+      {category && (
+        <Pagination
+          page={query.page ? parseInt(query.page) : 1}
+          total={count}
+          limitPerPage={limitPerPage(query)}
+        />
+      )}
+    </>
+  )
+}
+
+const SectionDisplay = ({ category, loader, models, query, count }) => {
+  const classes = useStyles();
+
+  return (
+    <>
       {loader ? (
         <Box className={classes.spaceFiller}><CircularProgress /></Box>
       ) : (
@@ -69,21 +113,9 @@ export default function Model({ modelsArr, modelsCount, modelsDArr, modelsDCount
           </Container>
         </Box>
       )}
-
-      {category && (
-        <Pagination
-          page={query.page ? parseInt(query.page) : 1}
-          total={count}
-          limitPerPage={limitPerPage(query)}
-        />
-      )}
-
-      <EmptyBar />
-    </BasicLayout>
+    </>
   )
 }
-
-//TODO: dodać sekcję, żeby można było wrzucać i dodatki, i modele
 
 export async function getServerSideProps(context) {
   const query = context.query;
@@ -93,11 +125,11 @@ export async function getServerSideProps(context) {
     _start: getStartItem(query),
   };
 
-  const getResponse = getModelByCustomProps(
+  const getResponse = getModelsByCustomProps(
     qs.stringify({ ...buildQuery, _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
   );
 
-  const getResponseCount = getModelByCustomPropsCount(
+  const getResponseCount = getModelsByCustomPropsCount(
     qs.stringify({ _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
   );
 

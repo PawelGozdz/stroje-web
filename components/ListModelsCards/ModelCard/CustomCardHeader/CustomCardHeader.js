@@ -12,9 +12,9 @@ export default function CustomCardHeader({ model }) {
         <Avatar
           aria-label="Płeć"
           className={classes.avatar}
-          title={model.plec.title}
+          title={model?.plec?.title || 'Dodatek'}
         >
-          {model.plec.title[0]}
+          {model?.plec?.title?.[0] || 'D'}
         </Avatar>
       }
       title={model.tytul}

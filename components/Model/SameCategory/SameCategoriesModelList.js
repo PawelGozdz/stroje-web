@@ -10,7 +10,7 @@ export function SameCategoriesItemList(props) {
   return (
     <List className={classes.categoryList}>
       {
-        _.map(props.categories, c => <CategoryLinkItem category={c} key={c.url} className={classes.categoryLink}/>)
+        _.map(props.categories, c => <CategoryLinkItem category={c} key={c.url} type={props.type} className={classes.categoryLink} />)
       }
     </List>
   )

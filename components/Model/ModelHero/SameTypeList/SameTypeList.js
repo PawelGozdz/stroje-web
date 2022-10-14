@@ -8,10 +8,11 @@ import Pagination from '../../../Pagination';
 import * as _ from 'lodash';
 import ListModelsCards from '../../../ListModelsCards';
 import { limitPerPage, getStartItem } from '../../../../utils/fetch';
-import { getModelByCustomProps, getModelByCustomPropsCount } from '../../../../api/model';
+import { getModelsByCustomProps, getModelsByCustomPropsCount } from '../../../../api/model';
+import { getDModelsByCustomProps, getDModelsByCustomPropsCount } from '../../../../api/d-model';
 
 
-export default function SameTypeList({ model }) {
+export default function SameTypeList({ model, type }) {
   const classes = useStyles();
 
   const [models, setModels] = useState(null);
@@ -31,7 +32,7 @@ export default function SameTypeList({ model }) {
       const where = {
         _where: [
           { 'url_nin': model.url },
-          { 'plec.url': model.plec.url },
+          { ...(model?.plec?.url && { 'plec.url': model.plec.url } || {}) },
           { type: model.type }
         ]
       };
@@ -44,11 +45,19 @@ export default function SameTypeList({ model }) {
 
       const getModelCount = qs.stringify({ ...where });
 
-      const response = await getModelByCustomProps(getModels);
-      const responseCount = await getModelByCustomPropsCount(getModelCount);
+      const responseData = type === 'dodatki' ? getDModelsByCustomProps(getModels) : getModelsByCustomProps(getModels);
+      const responseCountData = type === 'dodatki' ? getDModelsByCustomPropsCount(getModelCount) : getModelsByCustomPropsCount(getModelCount);
 
-      setModels(response || null);
-      setCount(responseCount || null);
+      try {
+        const [response, responseCount] = await Promise.all([responseData, responseCountData]);
+
+        setModels(response || null);
+        setCount(responseCount || null);
+
+      } catch (error) {
+        console.log(error);
+      }
+
       setLoader(false);
     })();
   }, [model]);

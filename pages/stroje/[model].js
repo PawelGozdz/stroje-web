@@ -1,7 +1,7 @@
 import React from 'react';
 import BasicLayout from '../../layouts/BasicLayout';
 
-import { getModelByCustomProps } from '../../api/model';
+import { getModelsByCustomProps } from '../../api/model';
 import { Box, Container } from '@mui/material';
 
 import * as qs from 'qs';
@@ -13,12 +13,14 @@ import BreadCrumbs from '../../components/BreadCrumbs';
 import { getPageProps } from '../../api/pages';
 import PageModel from '../../components/Model/PageModel';
 import { getGlobalProps } from '../../api/global';
+import Seo from '../../components/Seo/Seo';
 
 export default function Model({ model, pageProps, globalProps }) {
   const classes = useStyles();
 
   return (
     <BasicLayout>
+      <Seo title={model.title} description={model.opis} />
       <FloatingMenu />
       <BreadCrumbs />
 
@@ -38,7 +40,7 @@ export default function Model({ model, pageProps, globalProps }) {
 
 export async function getServerSideProps(context) {
   const buildQuery = qs.stringify({ _where: { 'url': context.query.model } });
-  const data = getModelByCustomProps(buildQuery);
+  const data = getModelsByCustomProps(buildQuery);
 
   const pageProps = getPageProps(
     qs.stringify({

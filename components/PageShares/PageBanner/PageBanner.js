@@ -12,7 +12,7 @@ export default function PageBanner({ banners }) {
             <ImageCustom
                 className={classes.image}
                 src={banners[0].url}
-                aspectRatio={4.5}
+                aspectRatio={2}
                 alt={banners[0].alternativeText}
                 title={banners[0].caption}
                 formats={banners[0].formats}

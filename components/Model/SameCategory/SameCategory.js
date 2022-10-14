@@ -21,11 +21,11 @@ export function SameCategory({ model }) {
       {
         model && size(model.categories) > 0 && (
           <Box className={classes.listWrapper}>
-            <SameCategoriesItemList categories={model.categories} />
+            <SameCategoriesItemList type={model.type} categories={model.categories} />
           </Box>
         )
       }
-      <SameTypeList model={model} />
+      <SameTypeList model={model} type={model.type} />
     </Box>
   )
 }

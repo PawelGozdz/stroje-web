@@ -14,7 +14,7 @@ export async function getModelsApi(query) {
   }
 }
 
-export async function getModelByCustomProps(query) {
+export async function getModelsByCustomProps(query) {
   try {
     const url = `${BASE_PATH}/models?${query}&_publicationState=live`;
 
@@ -28,7 +28,7 @@ export async function getModelByCustomProps(query) {
   }
 }
 
-export async function getModelByCustomPropsCount(query) {
+export async function getModelsByCustomPropsCount(query) {
   try {
     const url = `${BASE_PATH}/models/count?${query}&_publicationState=live`;
 

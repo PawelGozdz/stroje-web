@@ -3,6 +3,8 @@ import { makeStyles } from '@mui/styles';
 import { Grid, Box, Typography } from '@mui/material';
 import * as _ from 'lodash';
 import GenderButtons from '../GenderButtons';
+import DodatkiButtons from '../DodatkiButtons/DodatkiButtons';
+import Link from 'next/link';
 
 export default function HomeHeroContent() {
   const classes = useStyles();
@@ -24,7 +26,21 @@ export default function HomeHeroContent() {
         Superbohaterowie, rycerze, postacie z kreskówek, oraz wiele innych...
       </Typography>
 
-      <GenderButtons />
+      <Box component='div' className={classes.searchLink} >
+        <Link href={`/stroje`} passHref>
+          <a className={classes.ctaButton}>Stroje</a>
+        </Link>
+      </Box>
+
+      <Typography variant='h4' component='h2' className={classes.subHeading} >
+        Czy potrzebujesz dodatków?
+      </Typography>
+
+      <Box component='div' className={classes.searchLink} >
+        <Link href={`/dodatki`} passHref>
+          <a className={classes.ctaButton}>Dodatki</a>
+        </Link>
+      </Box>
 
       <Typography variant='h4' component='h2' className={classes.subHeading} >
         Sprawdź nowości
@@ -43,11 +59,10 @@ const useStyles = makeStyles(theme => ({
   },
   ctaButton: {
     ...theme.customButtons.primary,
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.7rem'
     },
     color: theme.palette.grey[50],
-    cursor: 'pointer'
   },
   action: {
     display: 'flex',

@@ -1,6 +1,5 @@
 import BasicLayout from '../layouts/BasicLayout';
 import Hero from '../components/MainPage/Hero';
-import Services from '../components/MainPage/Services';
 import HeroSlider from '../components/MainPage/Hero/HeroSlider'
 import HomeHeroContent from '../components/MainPage/Hero/HomeHeroContent';
 import EmptyBar from '../components/EmptyBar';
@@ -12,6 +11,9 @@ import PageBanner from '../components/PageShares/PageBanner';
 import { Typography, Container, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { size } from 'lodash';
+import Seo from '../components/Seo/Seo';
+import RecentlyAddedModels from '../components/MainPage/RecentyAdded/RecentlyAddedModels';
+import RecentlyAddedDModels from '../components/MainPage/RecentyAdded/RecentlyAddedDModels';
 
 export default function Home({ pageProps, globalProps }) {
   const classes = useStyles();
@@ -20,11 +22,13 @@ export default function Home({ pageProps, globalProps }) {
 
   const bannerData = indexPageData && indexPageData?.Extensions?.find(el => el.__component === 'banner.banner');
   const pageHeaders = indexPageData && indexPageData?.Extensions?.filter(el => el.__component === 'headers.page-headers');
+  const pageSlider = indexPageData && indexPageData?.Extensions?.find(el => el.__component === 'slider.slider');
 
   return (
     <BasicLayout>
+      <Seo />
       <FloatingMenu />
-      {bannerData && <PageBanner banners={bannerData.page_banners} />}
+      {bannerData?.page_banners?.length > 0 && <PageBanner banners={bannerData.page_banners} />}
       {pageHeaders && size(pageHeaders) > 0 &&
         <Container maxWidth='xl' className={classes.container}>
           {pageHeaders.map(header => (
@@ -43,13 +47,16 @@ export default function Home({ pageProps, globalProps }) {
         </Container>
       }
       <Hero >
-        <HeroSlider />
+        {pageSlider?.slider && pageSlider.slider.length > 0 && <HeroSlider slides={pageSlider?.slider} />}
         <HomeHeroContent />
       </Hero>
 
       <EmptyBar />
 
-      <Services />
+      <RecentlyAddedModels />
+      <EmptyBar />
+
+      <RecentlyAddedDModels />
 
       <EmptyBar />
     </BasicLayout>
@@ -62,27 +69,48 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(6),
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
-    // background: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(171,102,255,1) 0%, rgba(116,182,247,1) 90% )',
   },
   headers: {
     color: theme.palette.text.secondary,
+    wordBreak: 'break-word',
+    '&:not(:last-child)': {
+      marginBottom: theme.spacing(3),
+    },
     '& > h1': {
       fontSize: theme.typography.pxToRem(64),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(52),
+      }
     },
     '& > h2': {
       fontSize: theme.typography.pxToRem(50),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(36),
+      }
     },
     '& > h3': {
       fontSize: theme.typography.pxToRem(36),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(26),
+      }
     },
     '& > h4': {
       fontSize: theme.typography.pxToRem(26),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(20),
+      }
     },
     '& > h5': {
       fontSize: theme.typography.pxToRem(20),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(16),
+      }
     },
     '& > h6': {
       fontSize: theme.typography.pxToRem(16),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(12),
+      }
     },
   },
 }));

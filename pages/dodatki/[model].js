@@ -4,6 +4,7 @@ import { getDModelsByCustomProps } from '../../api/d-model';
 import { Box, Container } from '@mui/material';
 
 import * as qs from 'qs';
+import { size } from 'lodash';
 import { makeStyles } from '@mui/styles';
 
 import { SameCategory } from '../../components/Model/SameCategory'
@@ -12,12 +13,14 @@ import BreadCrumbs from '../../components/BreadCrumbs';
 import { getPageProps } from '../../api/pages';
 import PageModel from '../../components/Model/PageModel';
 import { getGlobalProps } from '../../api/global';
+import Seo from '../../components/Seo/Seo';
 
-export default function Dodatek({ model, pageProps, globalProps }) {
+export default function DModel({ model, pageProps, globalProps }) {
   const classes = useStyles();
 
   return (
     <BasicLayout>
+      <Seo title={model.title} description={model.opis} />
       <FloatingMenu />
       <BreadCrumbs />
 
@@ -25,7 +28,7 @@ export default function Dodatek({ model, pageProps, globalProps }) {
         {model && (
           <Box component='section' className={classes.section}>
             <Container maxWidth='xl' className={classes.container}>
-              <SameCategory model={model} />
+              {size(model.categories) > 0 && <SameCategory model={model} />}
             </Container>
           </Box>
         )}
@@ -41,7 +44,7 @@ export async function getServerSideProps(context) {
 
   const pageProps = getPageProps(
     qs.stringify({
-      strona: 'model'
+      strona: 'dodatki'
     })
   );
 

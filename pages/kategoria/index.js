@@ -49,11 +49,11 @@ export async function getServerSideProps(context) {
     //     _start: getStartItem(query),
     //   };
 
-    //   const response = await getModelByCustomProps(
+    //   const response = await getModelsByCustomProps(
     //     qs.stringify({ ...buildQuery, _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
     //   );
 
-    //   const responseCount = await getModelByCustomPropsCount(
+    //   const responseCount = await getModelsByCustomPropsCount(
     //     qs.stringify({ _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
     //   );
 

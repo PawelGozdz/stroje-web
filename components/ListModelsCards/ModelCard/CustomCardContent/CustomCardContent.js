@@ -43,7 +43,7 @@ export default function CustomCardContent({ model }) {
 
       <Box className={classes.container}>
         <Typography className={classes.opisContent}>
-          <Link href={`/${model.url}`} passHref>
+          <Link href={`/${model.type}/${model.url}`} passHref>
             <a className={classes.link}>Czytaj więcej...</a>
           </Link>
         </Typography>
