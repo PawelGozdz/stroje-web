@@ -13,8 +13,7 @@ import Pagination from '../../components/Pagination';
 import { getModelsByCustomProps, getModelsByCustomPropsCount } from '../../api/model';
 import { limitPerPage, getStartItem } from '../../utils/fetch';
 import EmptyBar from '../../components/EmptyBar';
-import { CategoryLinkItem } from '../../components/Model/SameCategory'
-import { getDModelsByCustomProps, getDModelsByCustomPropsCount } from '../../api/d-model';
+import { getDModelsByCustomProps } from '../../api/d-model';
 import Seo from '../../components/Seo/Seo';
 import { useAppContext } from '../../context/StateContext';
 
@@ -51,54 +50,67 @@ export default function Model({ modelsArr, modelsCount, modelsDArr, modelsDCount
       <FloatingMenu />
       <BreadCrumbs />
 
-      <SectionHeader category={category} type='stroje' />
-      <SectionDisplay category={category} loader={loader} models={models} query={query} count={count} />
+      {_.size(models) > 0 ? (
+        <>
+          <SectionHeader message={
+            category
+              ? `${_.upperFirst('stroje')} z kategorii ${category}`
+              : `${_.upperFirst('stroje')}`
+          } />
+          <SectionDisplay category={category} loader={loader} models={models} />
+          <SectionPagination query={query} count={count} />
+        </>
+      ) : (
+        <SectionHeader message={`Nie znaleziono strojów z kategorii ${category}`} />
+      )}
+
+
 
       <EmptyBar />
 
+      {_.size(modelsD) > 0 ? (
+        <>
+          <SectionHeader message={
+            category
+              ? `${_.upperFirst('dodatki')} z kategorii ${category}`
+              : `${_.upperFirst('dodatki')}`
+          } />
+          <SectionDisplay category={category} loader={loader} models={modelsD} />
+        </>
+      ) : (
+        <SectionHeader message={`Nie znaleziono dodatków z kategorii ${category}`} />
+      )}
 
       <EmptyBar />
+
     </BasicLayout>
   )
 }
 
-// TODO: zrobić, aby sie wyświetlały kategorie i napis np Stroje/Dodatki z kategorii
-
-const SectionHeader = ({ category, type }) => {
+const SectionHeader = ({ message }) => {
   const classes = useStyles();
 
   return (
     <Box component='section' className={classes.section}>
       <Container maxWidth='xl' className={classes.container}>
-
-        {category ? (<CategoryLinkItem category={category} type={type} />) : (
-          <Box component='section' className={classes.section}>
-            <Container maxWidth='xl' className={classes.container}>
-              <Typography variant='h3'>Nie znaleziono przedmiotów pasujących do kategorii {category}</Typography>
-            </Container>
-          </Box>)}
-
+        <Typography variant='h4' component='h3' className={classes.sectionHeader}>{message}</Typography>
       </Container>
     </Box>
   )
 }
 
-const SectionPagination = ({ category, query, count }) => {
+const SectionPagination = ({ query, count }) => {
 
   return (
-    <>
-      {category && (
-        <Pagination
-          page={query.page ? parseInt(query.page) : 1}
-          total={count}
-          limitPerPage={limitPerPage(query)}
-        />
-      )}
-    </>
+    <Pagination
+      page={query.page ? parseInt(query.page) : 1}
+      total={count}
+      limitPerPage={limitPerPage(query)}
+    />
   )
 }
 
-const SectionDisplay = ({ category, loader, models, query, count }) => {
+const SectionDisplay = ({ loader, models }) => {
   const classes = useStyles();
 
   return (
@@ -134,21 +146,20 @@ export async function getServerSideProps(context) {
   );
 
   const getResponseD = getDModelsByCustomProps(
-    qs.stringify({ ...buildQuery, _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
+    qs.stringify({ ...buildQuery, _where: { [`${query.q || 'categories'}.url`]: query.kryteria }, _start: 0 })
   );
 
-  const getResponseDCount = getDModelsByCustomPropsCount(
-    qs.stringify({ _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
-  );
+  // const getResponseDCount = getDModelsByCustomPropsCount(
+  //   qs.stringify({ _where: { [`${query.q || 'categories'}.url`]: query.kryteria } })
+  // );
 
-  const [response, responseCount, responseD, responseDCount] = await Promise.all([getResponse, getResponseCount, getResponseD, getResponseDCount])
+  const [response, responseCount, responseD] = await Promise.all([getResponse, getResponseCount, getResponseD])
 
   return {
     props: {
       modelsArr: response,
       modelsCount: responseCount,
       modelsDArr: responseD,
-      mozelsDCount: responseDCount,
     }
   }
 }

@@ -117,7 +117,7 @@ const SectionHeader = ({ category, type, message }) => {
     return (
         <Box component='section' className={classes.section}>
             <Container maxWidth='xl' className={classes.container}>
-                <Typography variant='h3' className={classes.sectionSubHeader}>
+                <Typography variant='h4' component='h3' className={classes.sectionHeader}>
                     {
                         message ? message : (category ? `Dostępne ${type} z kategorii ${category}` : `Dostępne ${type}`)
                     }

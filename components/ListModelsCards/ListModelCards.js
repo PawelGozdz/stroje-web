@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
-      marginTop: '3rem',
+      marginTop: '2rem',
     },
   },
 }));
