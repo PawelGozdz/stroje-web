@@ -5,6 +5,7 @@ import { useAppContext } from '../../context/StateContext';
 import Address from './Address';
 import Categories from './Categories';
 import Partners from './Partners';
+import { CONTACT_PHONES } from '../../utils/constants';
 
 export default function Footer() {
   const classes = useStyles();
@@ -14,8 +15,8 @@ export default function Footer() {
     {
       title: 'Kontakt',
       values: {
-        phones: ['788 479 789'],
-        email: 'agencja-reklamowa-impuls@wp.pl',
+        phones: CONTACT_PHONES,
+        email: 'agencjareklamowaimpuls@wp.pl',
         address: { street: 'ul. Owocowa 3', postCode: '27-200', city: 'Starachowice' }
       }
     },
@@ -24,9 +25,10 @@ export default function Footer() {
       values: [
         {
           title: 'Agencja Reklamowa Impuls', url: 'http://arimpuls.pl/'
-        }, {
-          title: 'Opieka Nad Grobami', url: 'http://opieka-nad-grobami.com/'
-        }
+        },
+        // {
+        //   title: 'Opieka Nad Grobami', url: 'http://opieka-nad-grobami.com/'
+        // }
       ]
     },
   ];

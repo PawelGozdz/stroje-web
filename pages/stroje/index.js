@@ -43,8 +43,9 @@ export default function Models({ pageProps, opositeModels }) {
 
             const where = {
                 _where: [
-                    { 'categories.kategoria_in': query.kategoria },
-                    { 'colors.kolor_in': query.kolor },
+                    { ...(query.kategoria && { 'categories.url_in': query.kategoria }) },
+                    { ...(query.plec && { 'plec.url_in': query.plec }) },
+                    { ...(query.kolor && { 'colors.kolor_in': query.kolor }) },
                 ]
             };
 
@@ -94,18 +95,22 @@ export default function Models({ pageProps, opositeModels }) {
 
             <EmptyBar />
 
-            <SectionHeader category={query.kategoria} type={typeOposite} message={`Te ${typeOposite} mogą Cię zainteresować...`} />
+            {loader
+                ? <CircularProgress />
+                : _.size(oModels) > 0 && (
+                    <>
+                        <SectionHeader category={query.kategoria} type={typeOposite} message={`Te ${typeOposite} mogą Cię zainteresować...`} />
 
-            <Box component='section' className={classes.section}>
-                <Container maxWidth='xl' className={classes.container}>
-                    {loader
-                        ? <CircularProgress />
-                        : _.size(models) > 0 && <ListModelsCards models={oModels} />
-                    }
-                </Container>
-            </Box>
+                        <Box component='section' className={classes.section}>
+                            <Container maxWidth='xl' className={classes.container}>
+                                <ListModelsCards models={oModels} />
+                            </Container>
+                        </Box>
 
-            <EmptyBar />
+                        <EmptyBar />
+                    </>
+                )
+            }
 
         </BasicLayout>
     )
@@ -148,8 +153,8 @@ export async function getServerSideProps(context) {
 
     const where = {
         _where: [
-            { 'categories.kategoria_in': query.kategoria },
-            { 'colors.kolor_in': query.kolor },
+            { ...(query.kategoria && { 'd_categories.url_in': query.kategoria }) },
+            { ...(query.kolor && { 'colors.kolor_in': query.kolor }) },
         ]
     };
 

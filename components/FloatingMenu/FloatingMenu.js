@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 
 import { Container, Box, Divider, Typography } from '@mui/material';
 import ListMenu from './CategoryMenu';
+import ModelListMenu from './ModelMenu';
 import { useAppContext } from '../../context/StateContext';
 import CustomActions from '../CustomCollapse/CustomActions';
 import CustomCollapse from '../CustomCollapse/CustomCollapse';
@@ -34,21 +35,21 @@ export default function FloatingMenu() {
               <header className={classes.categoryHeader}>
                 <Typography variant='h5'>Rodzaje</Typography>
               </header>
-              <ListMenu menu={genders} query={'plec'} />
+              <ModelListMenu menu={genders} query={'plec'} type='stroje' />
             </Box>
             <Divider orientation="vertical" variant="middle" flexItem className={classes.divider} />
             <Box className={classes.categorySection} >
               <header className={classes.categoryHeader}>
                 <Typography variant='h5'>Kategorie</Typography>
               </header>
-              <ListMenu menu={categories} />
+              <ListMenu menu={categories} type='kategoria' />
             </Box>
             <Divider orientation="vertical" variant="middle" flexItem className={classes.divider} />
             <Box className={classes.categorySection} >
               <header className={classes.categoryHeader}>
                 <Typography variant='h5'>Dodatki</Typography>
               </header>
-              <ListMenu menu={dodatki} />
+              <ModelListMenu menu={dodatki} type='dodatki' query={'kategoria'} />
             </Box>
           </Box>
         </CustomCollapse>
